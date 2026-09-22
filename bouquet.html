@@ -223,9 +223,7 @@ text-transform: uppercase;
         <main>
             <p class="title">for you, love</p>
             <p class="sub">A Lilac Bouquet</p>
-            <a href="#" onclick="shakeBouquet(event)">
-                <img class="bouquet-img" src="lilac-cutout.png" alt="A bouquet for you">
-            </a>
+            <img class="bouquet-img" src="lilac-cutout.png" alt="A bouquet for you">
             <p class="note">
                 A lilac stands for love and purity. I know my love for you is pure, and I'll give you the purest love every day. I will protect you and take care of you.
             </p>
@@ -306,18 +304,5 @@ text-transform: uppercase;
             })();
         </script>
 
-        <script>
-            function shakeBouquet(e) {
-                e.preventDefault();
-                const img = document.querySelector(".bouquet-img");
-                const note = document.querySelector(".note");
-                note.textContent = "Kulang pa 'to - ikaw lang ang totoong bouquet ko. Happy 17th Monthsary, love!";
-                img.style.animation = "none";
-                void img.offsetWidth;
-                img.style.animation = "popIn .6s cubic-bezier(.22, 1.61, .36, 1) both";
-                note.style.transform = "scale(1.05)";
-                setTimeout(function () { note.style.transform = ""; }, 300);
-            }
-        </script>
     </body>
 </html>

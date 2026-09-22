@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Surprise 2</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: "Quicksand", Georgia, serif;
+                color: #fff;
+                text-align: center;
+                background: linear-gradient(160deg, #7a1f2b 0%, #54101a 50%, #33060d 100%);
+                min-height: 100vh;
+                padding: 60px 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                position: relative;
+                overflow-x: hidden;
+            }
+
+body::before {
+                content: "";
+                position: fixed;
+                inset: 0;
+                background: none;
+                pointer-events: none;
+                z-index: 0;
+            }
+
+            main {
+                position: relative;
+                z-index: 1;
+                max-width: 860px;
+                padding-top: 8vh;
+            }
+
+            .heart-big {
+                font-size: clamp(4rem, 14vw, 6.5rem);
+                color: #fff;
+                filter: drop-shadow(0 12px 22px rgba(232, 129, 154, .5));
+                animation: beat 1.6s ease-in-out infinite;
+                margin-bottom: 28px;
+            }
+
+            @keyframes beat {
+                0%, 100% { transform: scale(1); }
+                25%      { transform: scale(1.12); }
+                40%      { transform: scale(1); }
+                55%      { transform: scale(1.08); }
+            }
+
+            h1 {
+                font-family: "Great Vibes", Georgia, serif;
+                font-weight: 400;
+                font-size: clamp(2.8rem, 9vw, 4rem);
+                letter-spacing: 1px;
+                color: #fff;
+                text-shadow: 0 1px 6px rgba(255, 255, 255, .7);
+                margin-bottom: 18px;
+                opacity: 0;
+                animation: fadeIn 1s ease forwards .4s;
+            }
+
+p.note {
+                font-family: inherit;
+                font-size: clamp(1.05rem, 3.5vw, 1.3rem);
+                color: #fff;
+                line-height: 1.7;
+                max-width: 520px;
+                opacity: 0;
+                animation: fadeInLeft 1.2s ease forwards .8s;
+            }
+
+            @keyframes fadeInLeft {
+                from { opacity: 0; transform: translateX(-30px); }
+                to   { opacity: 1; transform: translateX(0); }
+            }
+
+            p.quote {
+                font-family: "Great Vibes", Georgia, serif;
+                font-size: clamp(1.5rem, 4.5vw, 2.2rem);
+                color: #fff;
+                text-shadow: 0 1px 6px rgba(255, 255, 255, .6);
+                text-align: left;
+                margin: 0;
+                padding: 0;
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+
+            .quote-row {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: clamp(20px, 4vw, 48px);
+                margin: 72px auto 0;
+                width: 100%;
+                flex-wrap: nowrap;
+            }
+
+            .photo-frame {
+                width: clamp(260px, 38vw, 420px);
+                margin: 0;
+                flex-shrink: 0;
+            }
+
+            .photo-frame img {
+                display: block;
+                width: 100%;
+                height: auto;
+                border-radius: 14px;
+            }
+
+            .type-line {
+                display: inline-block;
+                vertical-align: top;
+            }
+
+            .intra-side {
+                display: block;
+                width: clamp(140px, 20vw, 220px);
+                border-radius: 16px;
+                transform: rotate(9deg);
+                box-shadow: 0 18px 40px rgba(0, 0, 0, .35);
+                flex-shrink: 0;
+                margin-left: clamp(24px, 5vw, 64px);
+            }
+
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(18px); }
+                to   { opacity: 1; transform: translateY(0); }
+            }
+
+            .back {
+                display: inline-block;
+                margin-top: auto;
+                font-family: "Poppins", sans-serif;
+                font-weight: 500;
+                font-size: .85rem;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                text-decoration: none;
+                color: #fff;
+                border: 2px solid rgba(192, 90, 124, .45);
+                padding: 12px 28px;
+                border-radius: 40px;
+                transition: background .25s ease, transform .2s ease;
+                opacity: 0;
+                animation: fadeIn 1s ease forwards 1.2s;
+            }
+
+            .back:hover {
+                background: rgba(232, 129, 154, .18);
+                transform: scale(1.06);
+            }
+
+            .music-player {
+                position: fixed;
+                right: 20px;
+                bottom: 24px;
+                z-index: 60;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                background: rgba(255, 250, 252, .9);
+                border-radius: 40px;
+                padding: 8px 16px 8px 8px;
+                box-shadow: 0 10px 26px rgba(192, 90, 124, .35);
+                backdrop-filter: blur(6px);
+                -webkit-backdrop-filter: blur(6px);
+            }
+
+            .playing-text {
+                font-family: "Poppins", sans-serif;
+                font-weight: 400;
+                font-size: .68rem;
+                letter-spacing: 2px;
+text-transform: uppercase;
+                color: #000;
+                white-space: nowrap;
+                margin: 0;
+            }
+
+            .play-btn {
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                background: #1b1220;
+                border: none;
+                cursor: pointer;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: transform .3s ease, box-shadow .3s ease;
+                box-shadow: 0 6px 18px rgba(0, 0, 0, .4);
+                flex-shrink: 0;
+            }
+
+            .vinyl-label {
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                background: radial-gradient(circle, #7a1f2b 30%, #54101a 100%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 2;
+                border: 2px solid #8a2f4d;
+            }
+
+            .vinyl-label svg {
+                width: 12px;
+                height: 12px;
+                fill: #fff;
+            }
+
+            .play-btn .pause-icon {
+                display: none;
+            }
+
+            .play-btn.playing {
+                animation: spin 3s linear infinite;
+                box-shadow: 0 10px 40px rgba(232, 129, 154, .55);
+            }
+
+            .play-btn.playing .play-icon {
+                display: none;
+            }
+
+            .play-btn.playing .pause-icon {
+                display: block;
+            }
+
+            @keyframes spin {
+                from { transform: rotate(0deg); }
+                to   { transform: rotate(360deg); }
+            }
+
+            .video-box {
+                position: relative;
+                z-index: 2;
+                width: clamp(280px, 66vw, 560px);
+                aspect-ratio: 16 / 9;
+                border-radius: 16px;
+                overflow: hidden;
+                flex: 0 1 auto;
+                margin-left: calc(var(--disc) * -0.5 + 8px);
+                box-shadow: 0 20px 44px rgba(120, 38, 62, .28);
+                background: #1b1220;
+                opacity: 0;
+                animation: fadeIn 1s ease forwards 1.2s;
+            }
+
+            .video-box video {
+                width: 100%;
+                height: 100%;
+                display: block;
+            }
+
+            .media-stage {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: fit-content;
+                max-width: 100%;
+                margin: 80px auto 0;
+                --disc: clamp(220px, 44vw, 360px);
+            }
+
+            .vinyl-wrap {
+                position: relative;
+                z-index: 1;
+                flex-shrink: 0;
+                width: var(--disc);
+                aspect-ratio: 1;
+                opacity: 0;
+                animation: vinylIn 1s ease forwards .6s;
+                filter: drop-shadow(0 22px 42px rgba(0, 0, 0, .45));
+            }
+
+            @keyframes vinylIn {
+                from { opacity: 0; transform: translateX(-40px); }
+                to   { opacity: 1; transform: translateX(0); }
+            }
+
+            .vinyl {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                background:
+                    repeating-radial-gradient(circle at 50% 50%,
+                        #141414 0px,
+                        #222 1px,
+                        #0a0a0a 3px,
+                        #101010 5px,
+                        #070707 8px);
+                box-shadow:
+                    inset 0 0 30px rgba(255, 255, 255, .07),
+                    inset 0 0 90px rgba(0, 0, 0, .95),
+                    0 0 0 1px rgba(0, 0, 0, .95);
+            }
+
+            .vinyl.spinning {
+                animation: spin 2.6s linear infinite;
+            }
+
+            .v-label {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 37%;
+                aspect-ratio: 1;
+                transform: translate(-50%, -50%);
+                border-radius: 50%;
+                background:
+                    radial-gradient(circle at 50% 50%, rgba(0, 0, 0, .95) 0 5.5%, transparent 6%),
+                    radial-gradient(circle at 50% 50%, #7a1f2b 0 30%, #54101a 78%, #33060d 100%);
+                box-shadow: 0 0 0 2px rgba(0, 0, 0, .65), inset 0 0 18px rgba(0, 0, 0, .5);
+            }
+
+            .v-shine {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                background:
+                    conic-gradient(from 210deg at calc(50% - 30%) 30%,
+                        rgba(255, 255, 255, .25) 0deg,
+                        transparent 30deg,
+                        transparent 200deg,
+                        rgba(255, 255, 255, .07) 225deg,
+                        transparent 260deg);
+                pointer-events: none;
+            }
+
+            @media (max-width: 640px) {
+                .media-stage {
+                    margin: 56px auto 0;
+                    --disc: clamp(150px, 45vw, 220px);
+                }
+                .video-box {
+                    margin-left: calc(var(--disc) * -0.5 + 16px);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+<h1>Song Dedicated for you</h1>
+            <div class="media-stage">
+                <div class="vinyl-wrap">
+                    <div class="vinyl" id="vinyl">
+                        <span class="v-label"></span>
+                        <span class="v-shine"></span>
+                    </div>
+                </div>
+                <div class="video-box">
+                    <video src="ikaw_lang.mp4#t=7" controls autoplay playsinline preload="auto"></video>
+</div>
+            </div>
+            <div class="quote-row">
+                <p class="quote"><span class="type-line line1">"Sa'n man maglayag</span><br><span class="type-line line2">Ikaw lang patutunguhan."</span></p>
+                <div class="photo-frame">
+                    <img src="nyaw.png" alt="Ikaw">
+                </div>
+                <img class="intra-side" src="intra.jpg" alt="">
+            </div>
+        </main>
+<a class="back" href="surprise.html#heartRow" onclick="sessionStorage.setItem('loveUnlocked','1')">back</a>
+
+        <script>
+            (function () {
+                var KEY = "gg_hub_visited";
+                var THIS = "heart2";
+                var ALL = ["heart1", "heart2", "heart3"];
+                function load() {
+                    try { return JSON.parse(sessionStorage.getItem(KEY)) || { order: [] }; } catch (e) { return { order: [] }; }
+                }
+                try {
+                    var st = load();
+                    var order = st.order || [];
+                    order = order.filter(function (x) { return x !== THIS; });
+                    order.push(THIS);
+                    st.order = order;
+                    sessionStorage.setItem(KEY, JSON.stringify(st));
+                } catch (e) {}
+                var back = document.querySelector(".back");
+                if (back) {
+                    back.addEventListener("click", function (e) {
+                        var st = load();
+                        var order = st.order || [];
+                        var seen = {};
+                        ALL.forEach(function (id) { if (order.indexOf(id) !== -1) seen[id] = true; });
+                        var allDone = ALL.every(function (id) { return seen[id]; });
+                        var shown = false;
+                        try { shown = sessionStorage.getItem("gg_final_shown") === "1"; } catch (err) {}
+                        if (allDone && order[order.length - 1] === THIS && !shown) {
+                            e.preventDefault();
+                            window.location.href = "final.html";
+                        }
+                    });
+                }
+            })();
+        </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var video = document.querySelector(".video-box video");
+                var vinyl = document.getElementById("vinyl");
+                if (video) {
+                    video.addEventListener("loadedmetadata", function () {
+                        if (video.currentTime < 7) video.currentTime = 7;
+                    });
+                    video.addEventListener("play", function () {
+                        if (vinyl) vinyl.classList.add("spinning");
+                    });
+                    video.addEventListener("pause", function () {
+                        if (vinyl) vinyl.classList.remove("spinning");
+                    });
+                    video.addEventListener("ended", function () {
+                        if (vinyl) vinyl.classList.remove("spinning");
+                    });
+                }
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Surprise 1</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: "Quicksand", Georgia, serif;
+                color: #fff;
+                text-align: center;
+                background: linear-gradient(160deg, #7a1f2b 0%, #54101a 50%, #33060d 100%);
+                min-height: 100vh;
+                padding: 60px 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                position: relative;
+                overflow-x: hidden;
+            }
+
+            body::before {
+                content: "";
+                position: fixed;
+                inset: 0;
+                background: none;
+                pointer-events: none;
+                z-index: 0;
+            }
+
+            main {
+                position: relative;
+                z-index: 1;
+                max-width: 1000px;
+                width: 100%;
+                padding-top: 8vh;
+            }
+
+            .heart-big {
+                font-size: clamp(4rem, 14vw, 6.5rem);
+                color: #fff;
+                filter: drop-shadow(0 12px 22px rgba(232, 129, 154, .5));
+                animation: beat 1.6s ease-in-out infinite;
+                margin-bottom: 28px;
+            }
+
+            @keyframes beat {
+                0%, 100% { transform: scale(1); }
+                25%      { transform: scale(1.12); }
+                40%      { transform: scale(1); }
+                55%      { transform: scale(1.08); }
+            }
+
+            h1 {
+                font-family: "Great Vibes", Georgia, serif;
+                font-weight: 400;
+                font-size: clamp(2.8rem, 9vw, 4rem);
+                letter-spacing: 1px;
+                color: #fff;
+                text-shadow: 0 1px 6px rgba(255, 255, 255, .7);
+                margin-bottom: 18px;
+                opacity: 0;
+                animation: fadeIn 1s ease forwards .4s;
+            }
+
+            p.note {
+                font-family: inherit;
+                font-size: clamp(1.05rem, 3.5vw, 1.3rem);
+                color: #fff;
+                line-height: 1.7;
+                max-width: 520px;
+                opacity: 0;
+                animation: fadeIn 1s ease forwards .8s;
+            }
+
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(18px); }
+                to   { opacity: 1; transform: translateY(0); }
+            }
+
+            .back {
+                display: inline-block;
+                margin-top: auto;
+                font-family: "Poppins", sans-serif;
+                font-weight: 500;
+                font-size: .85rem;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                text-decoration: none;
+                color: #fff;
+                border: 2px solid rgba(192, 90, 124, .45);
+                padding: 12px 28px;
+                border-radius: 40px;
+                transition: background .25s ease, transform .2s ease;
+                opacity: 0;
+                animation: fadeIn 1s ease forwards 1.2s;
+            }
+
+            .back:hover {
+                background: rgba(232, 129, 154, .18);
+                transform: scale(1.06);
+            }
+
+            .film-frame {
+                position: relative;
+                width: 100%;
+                max-width: 640px;
+                margin: 72px auto 0;
+                background: #141414;
+                padding: 46px 20px 48px;
+                border-radius: 14px;
+                box-shadow: 0 28px 60px rgba(60, 20, 40, .4), 0 8px 22px rgba(0, 0, 0, .45);
+                opacity: 0;
+                animation: fadeIn 1s ease forwards 1.2s;
+            }
+
+            .film-frame::before,
+            .film-frame::after {
+                content: "";
+                position: absolute;
+                left: 20px;
+                right: 20px;
+                height: 28px;
+                background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='28'%3E%3Crect x='19' y='3' width='22' height='22' rx='5' fill='%23ffffff'/%3E%3C/svg%3E") repeat-x;
+            }
+
+            .film-frame::before {
+                top: 12px;
+            }
+
+            .film-frame::after {
+                bottom: 12px;
+            }
+
+            .film-frame video {
+                display: block;
+                width: 100%;
+                aspect-ratio: 16 / 9;
+                object-fit: cover;
+                border-radius: 6px;
+                background: #141414;
+                box-shadow: inset 0 0 0 1px rgba(20, 20, 20, .18);
+            }
+
+            .film-frame .film-photo {
+                display: block;
+                width: 100%;
+                margin-top: 22px;
+                border-radius: 6px;
+                box-shadow: inset 0 0 0 1px rgba(20, 20, 20, .18);
+            }
+
+            .film-photo {
+                display: block;
+                width: 100%;
+                max-width: 1500px;
+                margin: 22px auto 0;
+                border-radius: 8px;
+            }
+
+            .memories-note {
+                font-family: Georgia, serif;
+                font-size: clamp(1.05rem, 3.5vw, 1.3rem);
+                color: #fff;
+                line-height: 1.7;
+                max-width: 520px;
+                margin: 40px auto 0;
+                padding-bottom: 60px;
+                opacity: 0;
+                animation: fadeIn 1s ease forwards 1.6s;
+            }
+
+            .polaroid-grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 110px 60px;
+                width: 100%;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 60px 20px;
+                opacity: 0;
+                animation: fadeIn 1s ease forwards 1.4s;
+            }
+
+            .polaroid {
+                position: relative;
+                margin: 0;
+                cursor: pointer;
+                perspective: 1200px;
+                transition: transform .3s ease;
+            }
+
+            .flip-inner {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                transform-style: preserve-3d;
+                transition: transform .6s ease;
+            }
+
+            .polaroid.flipped .flip-inner {
+                transform: rotateY(180deg);
+            }
+
+            .flip-front {
+                backface-visibility: hidden;
+                -webkit-backface-visibility: hidden;
+            }
+
+            .flip-front img {
+                display: block;
+                width: 100%;
+                height: auto;
+            }
+
+            .flip-back {
+                position: absolute;
+                inset: 0;
+                background: #fff;
+                color: #3a3a3a;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                transform: rotateY(180deg);
+                backface-visibility: hidden;
+                -webkit-backface-visibility: hidden;
+                box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .05);
+            }
+
+            .back-word {
+                font-family: "Great Vibes", Georgia, serif;
+                font-size: clamp(1.4rem, 3.5vw, 1.9rem);
+                line-height: 1;
+                color: #54101a;
+            }
+
+            .polaroid-hint {
+                position: fixed;
+                top: 16px;
+                left: 50%;
+                transform: translateX(-50%) translateY(-8px);
+                z-index: 60;
+                font-family: "Poppins", sans-serif;
+                font-size: .75rem;
+                letter-spacing: 1px;
+                color: #fff;
+                background: rgba(30, 8, 14, .55);
+                border: 1px solid rgba(232, 129, 154, .35);
+                padding: 8px 18px;
+                border-radius: 30px;
+                backdrop-filter: blur(6px);
+                -webkit-backdrop-filter: blur(6px);
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity .45s ease, transform .45s ease;
+            }
+
+            .polaroid-hint.show {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+
+            .polaroid:nth-child(1)  { transform: rotate(-3deg); }
+            .polaroid:nth-child(2)  { transform: rotate(4deg); }
+            .polaroid:nth-child(3)  { transform: rotate(-2deg); }
+            .polaroid:nth-child(4)  { transform: rotate(5deg); }
+            .polaroid:nth-child(5)  { transform: rotate(3deg); }
+            .polaroid:nth-child(6)  { transform: rotate(-4deg); }
+            .polaroid:nth-child(7)  { transform: rotate(2deg); }
+            .polaroid:nth-child(8)  { transform: rotate(-5deg); }
+            .polaroid:nth-child(9)  { transform: rotate(-3deg); }
+            .polaroid:nth-child(10) { transform: rotate(4deg); }
+            .polaroid:nth-child(11) { transform: rotate(-2deg); }
+            .polaroid:nth-child(12) { transform: rotate(3deg); }
+
+            .polaroid:hover {
+                transform: rotate(0deg) scale(1.08);
+                z-index: 10;
+            }
+
+            @media (max-width: 900px) {
+                .film-frame {
+                    margin: 56px auto 0;
+                }
+
+                .polaroid-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 80px 60px;
+                    padding: 40px 10px;
+                    width: 100%;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <h1>Memories</h1>
+            <div class="film-frame">
+                <video src="nahanap_kita.mp4" controls autoplay playsinline preload="metadata"></video>
+            </div>
+            <img class="film-photo" src="m-cutout.png" alt="a photo for you">
+            <p class="polaroid-hint">click all the polaroid pics</p>
+            <div class="polaroid-grid">
+                <figure class="polaroid"><div class="flip-inner"><div class="flip-front"><img src="p1.jpg" alt="memory 1"></div><div class="flip-back"><span class="back-word">being</span></div></div></figure>
+                <figure class="polaroid"><div class="flip-inner"><div class="flip-front"><img src="p2.jpg" alt="memory 2"></div><div class="flip-back"><span class="back-word">with</span></div></div></figure>
+                <figure class="polaroid"><div class="flip-inner"><div class="flip-front"><img src="p3.jpg" alt="memory 3"></div><div class="flip-back"><span class="back-word">you</span></div></div></figure>
+                <figure class="polaroid"><div class="flip-inner"><div class="flip-front"><img src="p4.jpg" alt="memory 4"></div><div class="flip-back"><span class="back-word">filled</span></div></div></figure>
+                <figure class="polaroid"><div class="flip-inner"><div class="flip-front"><img src="p5.jpg" alt="memory 5"></div><div class="flip-back"><span class="back-word">my</span></div></div></figure>
+                <figure class="polaroid"><div class="flip-inner"><div class="flip-front"><img src="p6.jpg" alt="memory 6"></div><div class="flip-back"><span class="back-word">life</span></div></div></figure>
+                <figure class="polaroid"><div class="flip-inner"><div class="flip-front"><img src="p7.jpg" alt="memory 7"></div><div class="flip-back"><span class="back-word">with</span></div></div></figure>
+                <figure class="polaroid"><div class="flip-inner"><div class="flip-front"><img src="p8.jpg" alt="memory 8"></div><div class="flip-back"><span class="back-word">so</span></div></div></figure>
+                <figure class="polaroid"><div class="flip-inner"><div class="flip-front"><img src="p9.jpg" alt="memory 9"></div><div class="flip-back"><span class="back-word">much</span></div></div></figure>
+                <figure class="polaroid"><div class="flip-inner"><div class="flip-front"><img src="p10.jpg" alt="memory 10"></div><div class="flip-back"><span class="back-word">love</span></div></div></figure>
+                <figure class="polaroid"><div class="flip-inner"><div class="flip-front"><img src="p11.jpg" alt="memory 11"></div><div class="flip-back"><span class="back-word">and</span></div></div></figure>
+                <figure class="polaroid"><div class="flip-inner"><div class="flip-front"><img src="p12.jpg" alt="memory 12"></div><div class="flip-back"><span class="back-word">happiness</span></div></div></figure>
+            </div>
+            <p class="memories-note">Ang mga memorya na hinding hindi ko makakalimutan hanggang sa dumating ang araw na matanda na tayo. Ikaw ang paborito kong alaala ngayon, at sa pang habang buhay nating pagsasama.</p>
+        </main>
+        <audio id="bgMusic" loop>
+            <source src="Libu-Libong Buwan (Uuwian) - Kyle Raphael (Lyric Video).mp3" type="audio/mpeg">
+        </audio>
+        <a class="back" href="surprise.html#heartRow" onclick="sessionStorage.setItem('loveUnlocked','1')">back</a>
+        <script>
+            (function () {
+                var cards = document.querySelectorAll(".polaroid");
+                Array.prototype.forEach.call(cards, function (card) {
+                    card.addEventListener("click", function () {
+                        this.classList.toggle("flipped");
+                    });
+                });
+                var hint = document.querySelector(".polaroid-hint");
+                var grid = document.querySelector(".polaroid-grid");
+                var hintShown = false;
+                var hintHidden = false;
+                var hintReady = false;
+                function hideHint() {
+                    if (!hintHidden && hint.classList.contains("show")) {
+                        hint.classList.remove("show");
+                        hintHidden = true;
+                    }
+                }
+                function checkHint() {
+                    if (!hint || hintHidden) return;
+                    var rect = grid.getBoundingClientRect();
+                    var inView = rect.top < window.innerHeight * 0.7 && rect.bottom > 0;
+                    if (inView && !hintShown) {
+                        hint.classList.add("show");
+                        hintShown = true;
+                        setTimeout(function () { hintReady = true; }, 1500);
+                    } else if (hintShown && hintReady) {
+                        hideHint();
+                    }
+                }
+                window.addEventListener("scroll", checkHint, { passive: true });
+                window.addEventListener("load", checkHint);
+                var KEY = "gg_hub_visited";
+                var THIS = "heart1";
+                var ALL = ["heart1", "heart2", "heart3"];
+                function load() {
+                    try { return JSON.parse(sessionStorage.getItem(KEY)) || { order: [] }; } catch (e) { return { order: [] }; }
+                }
+                try {
+                    var st = load();
+                    var order = st.order || [];
+                    order = order.filter(function (x) { return x !== THIS; });
+                    order.push(THIS);
+                    st.order = order;
+                    sessionStorage.setItem(KEY, JSON.stringify(st));
+                } catch (e) {}
+                var back = document.querySelector(".back");
+                if (back) {
+                    back.addEventListener("click", function (e) {
+                        var st = load();
+                        var order = st.order || [];
+                        var seen = {};
+                        ALL.forEach(function (id) { if (order.indexOf(id) !== -1) seen[id] = true; });
+                        var allDone = ALL.every(function (id) { return seen[id]; });
+                        var shown = false;
+                        try { shown = sessionStorage.getItem("gg_final_shown") === "1"; } catch (err) {}
+                        if (allDone && order[order.length - 1] === THIS && !shown) {
+                            e.preventDefault();
+                            window.location.href = "final.html";
+                        }
+                    });
+                }
+            })();
+        </script>
+        <script>
+            (function () {
+                var bgm = document.getElementById("bgMusic");
+                var st = {};
+                try { st = JSON.parse(sessionStorage.getItem("gg_nothing_song")) || {}; } catch (e) { st = {}; }
+                var shouldResume = !!(st.resume || st.playing);
+                var resumeTime = (st.time && Number(st.time) > 0 && isFinite(Number(st.time))) ? Number(st.time) : 0;
+                var songActive = false;
+
+                function applyTime() {
+                    if (!bgm || !(resumeTime > 0)) return;
+                    try { bgm.currentTime = resumeTime; } catch (e) {}
+                }
+                if (bgm) {
+                    if (bgm.readyState >= 1) applyTime();
+                    else bgm.addEventListener("loadedmetadata", applyTime);
+                }
+
+                function save() {
+                    if (!bgm || !songActive) return;
+                    try {
+                        sessionStorage.setItem("gg_nothing_song", JSON.stringify({
+                            playing: !bgm.paused,
+                            time: bgm.currentTime || 0
+                        }));
+                    } catch (e) {}
+                }
+
+                var video = document.querySelector(".film-frame video");
+                if (video) {
+                    video.addEventListener("ended", function () {
+                        if (!bgm || !shouldResume) return;
+                        shouldResume = false;
+                        songActive = true;
+                        applyTime();
+                        var p = bgm.play();
+                        if (p && p.catch) p.catch(function () {
+                            var retry = function () {
+                                var q = bgm.play();
+                                if (q && q.catch) q.catch(function () {});
+                            };
+                            document.addEventListener("click", retry, { once: true });
+                            document.addEventListener("touchstart", retry, { once: true });
+                        });
+                    });
+                }
+
+                setInterval(save, 1000);
+                window.addEventListener("pagehide", save);
+            })();
+        </script>
+    </body>
+</html>

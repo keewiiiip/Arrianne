@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Surprise 3</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: "Quicksand", Georgia, serif;
+                color: #fff;
+                text-align: center;
+                background: linear-gradient(160deg, #7a1f2b 0%, #54101a 50%, #33060d 100%);
+                min-height: 100vh;
+                padding: 60px 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                position: relative;
+                overflow-x: hidden;
+            }
+
+body::before {
+                content: "";
+                position: fixed;
+                inset: 0;
+                background: none;
+                pointer-events: none;
+                z-index: 0;
+            }
+
+main {
+                position: relative;
+                z-index: 1;
+                max-width: 1000px;
+                width: 100%;
+                padding-top: 8vh;
+            }
+
+            .heart-big {
+                font-size: clamp(4rem, 14vw, 6.5rem);
+                color: #fff;
+                filter: drop-shadow(0 12px 22px rgba(232, 129, 154, .5));
+                animation: beat 1.6s ease-in-out infinite;
+                margin-bottom: 28px;
+            }
+
+            @keyframes beat {
+                0%, 100% { transform: scale(1); }
+                25%      { transform: scale(1.12); }
+                40%      { transform: scale(1); }
+                55%      { transform: scale(1.08); }
+            }
+
+h1 {
+                font-family: "Great Vibes", Georgia, serif;
+                font-weight: 400;
+                font-size: clamp(2.8rem, 9vw, 4rem);
+                letter-spacing: 1px;
+                color: #fff;
+                text-shadow: 0 1px 6px rgba(255, 255, 255, .7);
+                margin-bottom: 90px;
+                opacity: 0;
+                animation: fadeIn 1s ease forwards .4s;
+}
+
+            p.note {
+                font-family: inherit;
+                font-size: clamp(1.05rem, 3.5vw, 1.3rem);
+                color: #fff;
+                line-height: 1.7;
+                max-width: 520px;
+                opacity: 0;
+                animation: fadeIn 1s ease forwards .8s;
+            }
+
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(18px); }
+                to   { opacity: 1; transform: translateY(0); }
+            }
+
+            .back {
+                display: inline-block;
+                margin-top: auto;
+                font-family: "Poppins", sans-serif;
+                font-weight: 500;
+                font-size: .85rem;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                text-decoration: none;
+                color: #fff;
+                border: 2px solid rgba(192, 90, 124, .45);
+                padding: 12px 28px;
+                border-radius: 40px;
+                transition: background .25s ease, transform .2s ease;
+                opacity: 0;
+                animation: fadeIn 1s ease forwards 1.2s;
+            }
+
+            .back:hover {
+                background: rgba(232, 129, 154, .18);
+                transform: scale(1.06);
+            }
+
+            .letter-body {
+                font-family: Georgia, "Times New Roman", serif;
+                font-size: clamp(1.05rem, 3.5vw, 1.3rem);
+                color: #fff;
+                line-height: 1.9;
+                max-width: 800px;
+                margin: 24px auto 0;
+                padding: 0 10px 40px;
+                text-align: justify;
+                opacity: 0;
+                animation: fadeIn 1s ease forwards .8s;
+            }
+
+            .letter-body p {
+                margin-bottom: 22px;
+                text-indent: 2rem;
+                letter-spacing: .2px;
+            }
+
+            .letter-body p:first-child,
+            .letter-body p:last-child {
+                text-indent: 0;
+            }
+
+            .letter-body .sign {
+                font-weight: 500;
+                text-align: right;
+                text-indent: 0;
+                margin-top: 8px;
+            }
+
+            .music-player {
+                position: fixed;
+                right: 20px;
+                bottom: 24px;
+                z-index: 60;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                background: rgba(255, 250, 252, .9);
+                border-radius: 40px;
+                padding: 8px 16px 8px 8px;
+                box-shadow: 0 10px 26px rgba(192, 90, 124, .35);
+                backdrop-filter: blur(6px);
+                -webkit-backdrop-filter: blur(6px);
+            }
+
+            .playing-text {
+                font-family: "Poppins", sans-serif;
+                font-weight: 400;
+                font-size: .68rem;
+                letter-spacing: 2px;
+text-transform: uppercase;
+                color: #000;
+                white-space: nowrap;
+                margin: 0;
+            }
+
+            .play-btn {
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                background: #1b1220;
+                border: none;
+                cursor: pointer;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: transform .3s ease, box-shadow .3s ease;
+                box-shadow: 0 6px 18px rgba(0, 0, 0, .4);
+                flex-shrink: 0;
+            }
+
+            .vinyl-label {
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                background: radial-gradient(circle, #7a1f2b 30%, #54101a 100%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 2;
+                border: 2px solid #8a2f4d;
+            }
+
+            .vinyl-label svg {
+                width: 12px;
+                height: 12px;
+                fill: #fff;
+            }
+
+            .play-btn .pause-icon {
+                display: none;
+            }
+
+            .play-btn.playing {
+                animation: spin 3s linear infinite;
+                box-shadow: 0 10px 40px rgba(232, 129, 154, .55);
+            }
+
+            .play-btn.playing .play-icon {
+                display: none;
+            }
+
+            .play-btn.playing .pause-icon {
+                display: block;
+            }
+
+@keyframes spin {
+                from { transform: rotate(0deg); }
+                to   { transform: rotate(360deg); }
+            }
+
+            </style>
+    </head>
+    <body>
+<main>
+            <h1>My letter for Arrianne Gail</h1>
+            <div class="letter-body">
+                <p>Dear Arrianne,</p>
+                <p>Thank you for staying through the good times and bad times. Please know that I'm grateful because you're mine. You're so kind and beautiful at alam kong sobrang swerte ko sayo. Mahal na mahal kita, girlfriend kong maganda.</p>
+                <p>Naaappreciate ko lahat sayo love. Nakita ko kung gaano ka nag-alala nung nabunggo ako kaya nafifeel kong ang magiging asawa ko soon is may pake talaga sakin at talagang aalagaan ako at ikaw yun. Ikaw ang aasawahin ko. Kapag naging mag-asawa na tayo, I promise to take care of you and love you everyday. I promise to appreciate all the big things and even the little things you do for me, kasi for me lahat ng ginagawa mo mahalaga.</p>
+                <p>I'll learn everyday to love you even more and try to understand you, because I know na minsan maarte ka and you need a boyfriend who is patient and understanding with you. I will try to slow down when we fight so I will not add fuel to the fire sa arguments natin. Yung pagmamahal ko sayo hindi lang 'to ngayon kasi alam kong pang-habang buhay 'to. Habang buhay kita mamahalin, love.</p>
+                <p>Kapag nafifeel mong nadadown ka love, please pumunta ka sa website na ginawa ko para sayo para hindi mo mafifeel na wala kang halaga. I appreciate you so much love, buong pagkatao mo naaappreciate ko. Palagi mo rin tatandaan na maganda ka at walang kulang o mali sayo. Kapag bumababa ang tingin mo sa sarili mo, please palagi mong tatandaan na mas mataas pa sa building ang tingin ko sayo.</p>
+                <p>Having you in my life is something I'll never take for granted kasi I'll try harder para masuklian ko ang mga ginagawa mo para sakin. Palagi akong babawi at magiging the best for you, mahal. Gustong gusto ko maging okay at masaya tayo diba? Kaya love, palagi kong iaaappreciate mga ginagawa mo para sakin. Alam ko kung gaano mo napapakita sa akin na mahal mo ako yung tipong may masabi lang ako kahit ano tungkol sakin, mag aalala ka na agad.</p>
+                <p>Noon pa man love ganyan ka na, kaya alam kong hindi ako magsisisi na ikaw ang pinili ko at hinding hindi ako magsisisi na ikaw ang aasawahin ko. Hindi ka nagbago love. Kung gaano ka may care sakin nun, ganun pa rin hanggang ngayon. Alam kong hindi tayo araw araw magiging okay at alam kong minsan may away, pero please always remember na I'll choose you and love you kahit na nagkakatampuhan na tayo.</p>
+                <p>Mahal na mahal kita sobra, Arrianne Gail. Thank you for loving me, for choosing me, for understanding me, and for taking care of me. Ikaw lang ang pipiliin at uuwian ko habang buhay. Mahal kita forever.</p>
+                <p class="sign">- Mikee</p>
+            </div>
+        </main>
+
+        <a class="back" href="surprise.html#heartRow" onclick="sessionStorage.setItem('loveUnlocked','1')">back</a>
+
+        <div class="music-player" id="musicPlayer">
+            <button class="play-btn" id="playBtn" onclick="__songToggle()">
+                <div class="vinyl-label">
+                    <svg class="play-icon" viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+                </div>
+            </button>
+            <p class="playing-text" id="playingText">play this song</p>
+        </div>
+
+<audio id="bgMusic">
+            <source src="Libu-Libong Buwan (Uuwian) - Kyle Raphael (Lyric Video).mp3" type="audio/mpeg">
+        </audio>
+
+        <script>
+            (function () {
+                var KEY = "gg_hub_visited";
+                var THIS = "heart3";
+                var ALL = ["heart1", "heart2", "heart3"];
+                function load() {
+                    try { return JSON.parse(sessionStorage.getItem(KEY)) || { order: [] }; } catch (e) { return { order: [] }; }
+                }
+                try {
+                    var st = load();
+                    var order = st.order || [];
+                    order = order.filter(function (x) { return x !== THIS; });
+                    order.push(THIS);
+                    st.order = order;
+                    sessionStorage.setItem(KEY, JSON.stringify(st));
+                } catch (e) {}
+                var back = document.querySelector(".back");
+                if (back) {
+                    back.addEventListener("click", function (e) {
+                        var st = load();
+                        var order = st.order || [];
+                        var seen = {};
+                        ALL.forEach(function (id) { if (order.indexOf(id) !== -1) seen[id] = true; });
+                        var allDone = ALL.every(function (id) { return seen[id]; });
+                        var shown = false;
+                        try { shown = sessionStorage.getItem("gg_final_shown") === "1"; } catch (err) {}
+                        if (allDone && order[order.length - 1] === THIS && !shown) {
+                            e.preventDefault();
+                            window.location.href = "final.html";
+                        }
+                    });
+                }
+            })();
+        </script>
+
+        <script>
+            (function () {
+                var STORE = "gg_nothing_song";
+                var audio = document.getElementById("bgMusic");
+                var btn = document.getElementById("playBtn");
+                var player = document.getElementById("musicPlayer");
+                var txt = document.getElementById("playingText");
+
+                function save() {
+                    try {
+                        sessionStorage.setItem(STORE, JSON.stringify({ playing: !audio.paused, time: audio.currentTime || 0 }));
+                    } catch (e) {}
+                }
+
+                function load() {
+                    try { return JSON.parse(sessionStorage.getItem(STORE)) || {}; } catch (e) { return {}; }
+                }
+
+                function setUI(playing) {
+                    btn.classList.toggle("playing", playing);
+                    if (player) player.classList.toggle("playing", playing);
+                    txt.textContent = playing ? "playing" : "play this song";
+                }
+
+                window.__songToggle = function () {
+                    if (!audio) return;
+                    if (audio.paused) {
+                        var p = audio.play();
+                        if (p && p.catch) p.catch(function () {});
+                        setUI(true);
+                    } else {
+                        audio.pause();
+                        setUI(false);
+                    }
+                    save();
+                };
+
+(function init() {
+                    var st = load();
+                    var startAt = 74;
+                    var t = st.time;
+                    if (!(t && Number(t) > 0 && isFinite(t))) {
+                        t = startAt;
+                    }
+                    audio.currentTime = Number(t);
+                    audio.addEventListener("ended", function () {
+                        audio.currentTime = 3;
+                        var p = audio.play();
+                        if (p && p.catch) p.catch(function () {});
+                    });
+                    setInterval(save, 1000);
+                    window.addEventListener("pagehide", save);
+                    if (st.playing) {
+                        var p = audio.play();
+                        if (p && p.catch) p.catch(function () { setUI(false); });
+                        setUI(true);
+                        if (audio.paused) {
+                            var tryResume = function () {
+                                var q = audio.play();
+                                if (q && q.catch) q.catch(function () {});
+                                setUI(true);
+                            };
+                            document.addEventListener("click", tryResume, { once: true });
+                            document.addEventListener("touchstart", tryResume, { once: true });
+                            document.addEventListener("keydown", tryResume, { once: true });
+                        }
+                    } else {
+                        setUI(false);
+                    }
+                })();
+            })();
+        </script>
+    </body>
+</html>

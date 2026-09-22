@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Final</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            html,
+            body {
+                height: 100%;
+            }
+
+            body {
+                overflow: hidden;
+            }
+
+            .pendant-full {
+                position: fixed;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+                opacity: 0;
+                animation: slowZoom 3s ease-out forwards;
+            }
+
+            @keyframes slowZoom {
+                0%   { opacity: 0; transform: scale(1.12); }
+                30%  { opacity: 1; }
+                100% { opacity: 1; transform: scale(1); }
+            }
+
+            .back {
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 10;
+                font-family: "Poppins", sans-serif;
+                font-weight: 500;
+                font-size: .85rem;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                text-decoration: none;
+                color: #fff;
+                background: rgba(0, 0, 0, .35);
+                border: 2px solid rgba(255, 255, 255, .6);
+                padding: 10px 24px;
+                border-radius: 40px;
+                opacity: 0;
+                animation: fadeUp 1s ease forwards 2s;
+                transition: background .25s ease, transform .2s ease;
+            }
+
+            @keyframes fadeUp {
+                from { opacity: 0; transform: translateX(-50%) translateY(14px); }
+                to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+            }
+
+            .back:hover {
+                background: rgba(0, 0, 0, .55);
+                transform: translateX(-50%) translateY(0) scale(1.06);
+            }
+
+            .music-player {
+                position: fixed;
+                right: 20px;
+                bottom: 20px;
+                z-index: 10;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                background: rgba(0, 0, 0, .4);
+                border-radius: 40px;
+                padding: 8px 16px 8px 8px;
+                border: 2px solid rgba(255, 255, 255, .6);
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
+            }
+
+            .playing-text {
+                font-family: "Poppins", sans-serif;
+                font-weight: 400;
+                font-size: .68rem;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                color: #fff;
+                white-space: nowrap;
+                margin: 0;
+            }
+
+            .play-btn {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: #1b1220;
+                border: none;
+                cursor: pointer;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+            }
+
+            .play-btn svg {
+                width: 12px;
+                height: 12px;
+                fill: #fff;
+            }
+
+            .play-btn .pause-icon {
+                display: none;
+            }
+
+            .play-btn.playing .play-icon {
+                display: none;
+            }
+
+            .play-btn.playing .pause-icon {
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <img class="pendant-full" src="pendant.jpg" alt="pendant">
+        <a class="back" href="surprise.html#heartRow" onclick="sessionStorage.setItem('loveUnlocked','1')">back</a>
+
+        <script>
+            try { sessionStorage.setItem("gg_final_shown", "1"); } catch (e) {}
+        </script>
+
+        <div class="music-player" id="musicPlayer">
+            <button class="play-btn" id="playBtn" onclick="__songToggle()">
+                <svg class="play-icon" viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg>
+                <svg class="pause-icon" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+            </button>
+            <p class="playing-text" id="playingText">play this song</p>
+        </div>
+
+        <audio id="bgMusic" loop>
+            <source src="Libu-Libong Buwan (Uuwian) - Kyle Raphael (Lyric Video).mp3" type="audio/mpeg">
+        </audio>
+
+        <script>
+            (function () {
+                var STORE = "gg_nothing_song";
+                var audio = document.getElementById("bgMusic");
+                var btn = document.getElementById("playBtn");
+                var player = document.getElementById("musicPlayer");
+                var txt = document.getElementById("playingText");
+
+                function save() {
+                    try {
+                        sessionStorage.setItem(STORE, JSON.stringify({ playing: !audio.paused, time: audio.currentTime || 0 }));
+                    } catch (e) {}
+                }
+
+                function load() {
+                    try { return JSON.parse(sessionStorage.getItem(STORE)) || {}; } catch (e) { return {}; }
+                }
+
+                function setUI(playing) {
+                    btn.classList.toggle("playing", playing);
+                    if (player) player.classList.toggle("playing", playing);
+                    txt.textContent = playing ? "playing" : "play this song";
+                }
+
+                window.__songToggle = function () {
+                    if (!audio) return;
+                    if (audio.paused) {
+                        var p = audio.play();
+                        if (p && p.catch) p.catch(function () {});
+                        setUI(true);
+                    } else {
+                        audio.pause();
+                        setUI(false);
+                    }
+                    save();
+                };
+
+                (function init() {
+                    var st = load();
+                    var startAt = 74;
+                    var t = st.time;
+                    if (!(t && Number(t) > 0 && isFinite(t))) {
+                        t = startAt;
+                    }
+                    audio.currentTime = Number(t);
+                    setInterval(save, 1000);
+                    window.addEventListener("pagehide", save);
+                    if (st.playing) {
+                        var p = audio.play();
+                        if (p && p.catch) p.catch(function () { setUI(false); });
+                        setUI(true);
+                        if (audio.paused) {
+                            var tryResume = function () {
+                                var q = audio.play();
+                                if (q && q.catch) q.catch(function () {});
+                                setUI(true);
+                            };
+                            document.addEventListener("click", tryResume, { once: true });
+                            document.addEventListener("touchstart", tryResume, { once: true });
+                            document.addEventListener("keydown", tryResume, { once: true });
+                        }
+                    } else {
+                        setUI(false);
+                    }
+                })();
+            })();
+        </script>
+    </body>
+</html>

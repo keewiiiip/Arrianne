@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Gail</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Quicksand:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: "Quicksand", Georgia, serif;
+                color: #fff;
+                text-align: center;
+                background: linear-gradient(160deg, #7a1f2b 0%, #54101a 55%, #33060d 100%);
+                min-height: 100vh;
+                padding: 60px 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                overflow-x: hidden;
+            }
+
+body::before {
+                content: "";
+                position: fixed;
+                inset: 0;
+                background: none;
+                pointer-events: none;
+                z-index: 0;
+            }
+
+            
+            
+
+            main {
+                position: relative;
+                z-index: 1;
+            }
+
+h1 {
+font-family: "Great Vibes", Georgia, serif;
+                font-weight: 400;
+                font-size: clamp(2.2rem, 6.5vw, 3.4rem);
+                letter-spacing: 1px;
+                color: #fff;
+                margin-bottom: 48px;
+                text-shadow: 0 0 12px rgba(255,255,255,.7), 0 2px 14px rgba(138, 43, 226, .25);
+                opacity: 0;
+                animation: fadeTitle 1.6s ease forwards;
+            }
+
+            h1 .word {
+                display: inline-block;
+                opacity: 1;
+                transform: none;
+                animation: none;
+            }
+
+            @keyframes fadeTitle {
+                from { opacity: 0; transform: translateY(16px) scale(.96); }
+                to   { opacity: 1; transform: translateY(0) scale(1); }
+            }
+
+            .word {
+                display: inline-block;
+                opacity: 0;
+                transform: translateY(24px) scale(.9);
+                animation: wordIn .4s ease forwards;
+            }
+
+            .word:nth-child(1) { animation-delay: .2s; }
+            .word:nth-child(2) { animation-delay: .45s; }
+            .word:nth-child(3) { animation-delay: .7s; }
+            .word:nth-child(4) { animation-delay: .95s; }
+
+            @keyframes wordIn {
+                to { opacity: 1; transform: translateY(0); }
+            }
+
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(18px) scale(.95); }
+                to   { opacity: 1; transform: translateY(0) scale(1); }
+            }
+
+            @keyframes glowText {
+                0%, 100% { text-shadow: 0 0 12px rgba(255,255,255,.7), 0 2px 14px rgba(138, 43, 226, .25); }
+                50%      { text-shadow: 0 0 22px rgba(255,255,255,.95), 0 0 40px rgba(232,129,154,.75); }
+            }
+
+.subtitle {
+                font-family: Arial, sans-serif;
+                font-weight: 500;
+                font-size: clamp(1.3rem, 4vw, 1.8rem);
+                letter-spacing: 4px;
+                text-transform: uppercase;
+                color: #fff;
+                margin-bottom: 24px;
+                text-shadow: 0 0 10px rgba(255,255,255,.6);
+                opacity: 0;
+                transform: translateY(24px) scale(.9);
+                animation: fadeIn 1.1s ease forwards 1.2s;
+            }
+
+            img {
+                display: block;
+                user-select: none;
+            }
+
+            .envelope-wrap {
+                position: relative;
+                display: inline-block;
+                animation: bob 3.2s ease-in-out infinite;
+                filter: drop-shadow(0 14px 26px rgba(43, 12, 58, .35));
+                cursor: pointer;
+            }
+
+            .envelope {
+                width: min(400px, 85vw);
+                height: auto;
+                transition: transform .3s ease;
+            }
+
+            .envelope-wrap:hover {
+                animation-play-state: paused;
+            }
+
+            .envelope-wrap:hover .envelope {
+                transform: scale(1.05) rotate(-2deg);
+            }
+
+            @keyframes bob {
+                0%, 100% { transform: translateY(0); }
+                50%      { transform: translateY(-14px); }
+            }
+
+.surprise-text {
+                color: #fff;
+                font-size: .85rem;
+                font-weight: 500;
+                letter-spacing: 3px;
+                text-transform: uppercase;
+                margin-top: 32px;
+                text-shadow: 0 0 10px rgba(255,255,255,.6);
+                opacity: 0;
+                transform: translateY(24px) scale(.9);
+                animation: wordIn .4s ease forwards .55s;
+            }
+
+            .music-player {
+                position: fixed;
+                right: 20px;
+                bottom: 24px;
+                z-index: 60;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                background: rgba(250, 245, 252, .9);
+                border-radius: 40px;
+                padding: 8px 16px 8px 8px;
+                box-shadow: 0 10px 26px rgba(110, 60, 135, .35);
+                backdrop-filter: blur(6px);
+                -webkit-backdrop-filter: blur(6px);
+            }
+
+            .playing-text {
+                font-family: "Poppins", sans-serif;
+                font-weight: 400;
+                font-size: .68rem;
+                letter-spacing: 2px;
+text-transform: uppercase;
+                color: #000;
+                white-space: nowrap;
+                margin: 0;
+            }
+
+            .play-btn {
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                background: #1b1220;
+                border: none;
+                cursor: pointer;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: transform .3s ease, box-shadow .3s ease;
+                box-shadow: 0 6px 18px rgba(0, 0, 0, .4);
+                flex-shrink: 0;
+            }
+
+            .vinyl-label {
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                background: radial-gradient(circle, #7a1f2b 30%, #54101a 100%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 2;
+                border: 2px solid #8a2f4d;
+            }
+
+            .vinyl-label svg {
+                width: 12px;
+                height: 12px;
+                fill: #fff;
+            }
+
+            .play-btn .pause-icon {
+                display: none;
+            }
+
+            .play-btn.playing {
+                animation: spin 3s linear infinite;
+                box-shadow: 0 10px 40px rgba(232, 129, 154, .55);
+            }
+
+            .play-btn.playing .play-icon {
+                display: none;
+            }
+
+            .play-btn.playing .pause-icon {
+                display: block;
+            }
+
+            @keyframes spin {
+                from { transform: rotate(0deg); }
+                to   { transform: rotate(360deg); }
+            }
+
+            .mikee {
+                position: fixed;
+                bottom: 16px;
+                left: 0;
+                right: 0;
+                text-align: center;
+                font-family: inherit;
+                font-style: normal;
+                font-size: 1rem;
+                color: rgba(255, 255, 255, .65);
+                z-index: 10;
+                pointer-events: none;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <h1>
+                    <span class="word">Happy</span>
+                    <span class="word">17th</span>
+                    <span class="word">Monthsary,</span>
+                    <span class="word">Love</span>
+                </h1>
+            <p class="subtitle">YOU GOT A MAIL!</p>
+
+            <a href="surprise.html" class="envelope-wrap">
+                <img class="envelope" src="envelope-cutout.png" alt="envelope">
+            </a>
+            <p class="surprise-text">Click here for a surprise!</p>
+        </main>
+
+        <footer class="mikee">- Mikee</footer>
+
+        <div class="music-player" id="musicPlayer">
+            <button class="play-btn" id="playBtn" onclick="__songToggle()">
+                <div class="vinyl-label">
+                    <svg class="play-icon" viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+                </div>
+            </button>
+            <p class="playing-text" id="playingText">play this song</p>
+        </div>
+
+        <audio id="bgMusic" loop>
+            <source src="Libu-Libong Buwan (Uuwian) - Kyle Raphael (Lyric Video).mp3" type="audio/mpeg">
+        </audio>
+
+        <script>
+            (function () {
+                var STORE = "gg_nothing_song";
+                var audio = document.getElementById("bgMusic");
+                var btn = document.getElementById("playBtn");
+                var player = document.getElementById("musicPlayer");
+                var txt = document.getElementById("playingText");
+
+                function save() {
+                    try {
+                        sessionStorage.setItem(STORE, JSON.stringify({ playing: !audio.paused, time: audio.currentTime || 0 }));
+                    } catch (e) {}
+                }
+
+                function load() {
+                    try { return JSON.parse(sessionStorage.getItem(STORE)) || {}; } catch (e) { return {}; }
+                }
+
+                function setUI(playing) {
+                    btn.classList.toggle("playing", playing);
+                    if (player) player.classList.toggle("playing", playing);
+                    txt.textContent = playing ? "playing" : "play this song";
+                }
+
+window.__songToggle = function () {
+                    if (!audio) return;
+                    if (audio.paused) {
+                        var p = audio.play();
+                        if (p && p.catch) p.catch(function () {});
+                        setUI(true);
+                        if (!showSongHintOnce(txt)) {
+                            clearTimeout(playingTimer);
+                            txt.textContent = "playing";
+                        }
+                    } else {
+                        audio.pause();
+                        clearTimeout(playingTimer);
+                        setUI(false);
+                    }
+                    save();
+                };
+
+                var playingTimer;
+
+                function showSongHintOnce(txt) {
+                    var shown = "";
+                    try { shown = sessionStorage.getItem("gg_song_hint") || ""; } catch (e) {}
+                    if (shown === "1") return false;
+                    try { sessionStorage.setItem("gg_song_hint", "1"); } catch (e) {}
+                    txt.textContent = "Listen to the song while looking at what I made for you";
+                    clearTimeout(playingTimer);
+                    playingTimer = setTimeout(function () {
+                        txt.textContent = "playing";
+                    }, 3000);
+                    return true;
+                }
+
+(function init() {
+                    var st = load();
+                    var startAt = 74;
+                    var t = st.time;
+                    if (!(t && Number(t) > 0 && isFinite(t))) {
+                        t = startAt;
+                    }
+                    audio.currentTime = Number(t);
+                    setInterval(save, 1000);
+                    window.addEventListener("pagehide", save);
+                    if (st.playing) {
+                        var p = audio.play();
+                        if (p && p.catch) p.catch(function () { setUI(false); });
+                        setUI(true);
+                    } else {
+                        setUI(false);
+                    }
+                })();
+            })();
+        </script>
+        </body>
+</html>

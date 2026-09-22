@@ -293,10 +293,20 @@ text-transform: uppercase;
                     audio.currentTime = Number(t);
                     setInterval(save, 1000);
                     window.addEventListener("pagehide", save);
-                    if (st.playing) {
+if (st.playing) {
                         var p = audio.play();
                         if (p && p.catch) p.catch(function () { setUI(false); });
                         setUI(true);
+                        if (audio.paused) {
+                            var tryResume = function () {
+                                var q = audio.play();
+                                if (q && q.catch) q.catch(function () {});
+                                setUI(true);
+                            };
+                            document.addEventListener("click", tryResume, { once: true });
+                            document.addEventListener("touchstart", tryResume, { once: true });
+                            document.addEventListener("keydown", tryResume, { once: true });
+                        }
                     } else {
                         setUI(false);
                     }

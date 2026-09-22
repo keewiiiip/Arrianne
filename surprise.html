@@ -812,6 +812,15 @@ let playingTimer;
                     btn.classList.add("playing");
                     player.classList.add("playing");
                     txt.textContent = "playing";
+                    if (audio.paused) {
+                        let resume = function () {
+                            let q = audio.play();
+                            if (q && q.catch) q.catch(function () {});
+                        };
+                        document.addEventListener("click", resume, { once: true });
+                        document.addEventListener("touchstart", resume, { once: true });
+                        document.addEventListener("keydown", resume, { once: true });
+                    }
                 }
             })();
 
